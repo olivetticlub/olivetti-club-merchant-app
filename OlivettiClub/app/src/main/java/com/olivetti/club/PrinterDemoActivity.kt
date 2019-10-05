@@ -1,19 +1,21 @@
 package com.olivetti.club
 
 import android.content.*
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.olivetti.club.enums.CouponType
 import com.olivetti.club.utils.ConfigurationManager
 import com.olivetti.club.utils.Utils
-import it.jolmi.elaconnector.messages.enums.*
 import it.jolmi.elaconnector.messages.Barcode
 import it.jolmi.elaconnector.messages.ElaResponse
-import it.jolmi.elaconnector.service.BroadcastValues
+import it.jolmi.elaconnector.messages.enums.CodeType
+import it.jolmi.elaconnector.messages.enums.ConnectionStatus
+import it.jolmi.elaconnector.messages.enums.StationType
+import it.jolmi.elaconnector.messages.enums.Status
 import it.jolmi.elaconnector.service.BroadcastValues.SOCKET_ACTION
 import it.jolmi.elaconnector.service.BroadcastValues.SOCKET_STATUS
 import it.jolmi.elaconnector.service.IElaResponseListener
@@ -21,8 +23,8 @@ import it.jolmi.elaconnector.service.printer.ElaPrinterLocalBinder
 import it.jolmi.elaconnector.service.printer.IElaPrinter
 import it.jolmi.elaconnector.work.ElaService
 import kotlinx.android.synthetic.main.activity_printer_demo.*
-import kotlin.random.Random
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlin.random.Random
 
 
 @ExperimentalCoroutinesApi
@@ -47,27 +49,21 @@ class PrinterDemoActivity : AppCompatActivity() {
         bindService(mElaConnectorServiceIntent, mServiceConnection, Context.BIND_AUTO_CREATE)
 
         connectPrinter.setOnClickListener {
-            invokeElaConnectorService { service: IElaPrinter ->
-                service.setHost("192.168.68.209")
-                service.setPort(9100)
-            }
-
-
-            invokeElaConnectorService { service: IElaPrinter ->
-                manageElaConnectorConnection(service.getHost(), service.getPort())
-            }
+            connectToPrinter()
         }
 
 
     }
 
-    private fun manageElaConnectorConnection(host: String, port: Int) {
-        invokeElaConnectorService {
-            if (it.getConnectionStatus() == (ConnectionStatus.STATE_DISCONNECTED)) {
-                it.connect(host, port)
-            } else {
-                it.disconnect()
-            }
+    private fun connectToPrinter() {
+        invokeElaConnectorService { service: IElaPrinter ->
+            service.setHost("192.168.68.209")
+            service.setPort(9100)
+        }
+
+
+        invokeElaConnectorService { service: IElaPrinter ->
+            manageElaConnectorConnection(service.getHost(), service.getPort())
         }
     }
 
@@ -110,6 +106,8 @@ class PrinterDemoActivity : AppCompatActivity() {
                         )
 
                         it.printCoupon(barcode)
+
+
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -120,9 +118,28 @@ class PrinterDemoActivity : AppCompatActivity() {
                             message
                         )
                     }
+                } finally {
+                    invokeElaConnectorService { elaDisconnect() }
                 }
             }
 
+        }
+    }
+
+    private fun manageElaConnectorConnection(host: String, port: Int) {
+        invokeElaConnectorService {
+            if (it.getConnectionStatus() == (ConnectionStatus.STATE_DISCONNECTED)) {
+                it.connect(host, port)
+            } else {
+                it.disconnect()
+            }
+        }
+    }
+
+
+    private fun elaDisconnect() {
+        invokeElaConnectorService {
+            it.disconnect()
         }
     }
 
