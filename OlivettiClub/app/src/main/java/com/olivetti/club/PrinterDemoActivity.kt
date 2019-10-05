@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.olivetti.club.enums.CouponType
@@ -13,7 +14,6 @@ import com.olivetti.club.utils.Utils
 import it.jolmi.elaconnector.messages.Barcode
 import it.jolmi.elaconnector.messages.ElaResponse
 import it.jolmi.elaconnector.messages.enums.CodeType
-import it.jolmi.elaconnector.messages.enums.ConnectionStatus
 import it.jolmi.elaconnector.messages.enums.StationType
 import it.jolmi.elaconnector.messages.enums.Status
 import it.jolmi.elaconnector.service.BroadcastValues.SOCKET_ACTION
@@ -52,18 +52,11 @@ class PrinterDemoActivity : AppCompatActivity() {
             connectToPrinter()
         }
 
-
     }
 
     private fun connectToPrinter() {
         invokeElaConnectorService { service: IElaPrinter ->
-            service.setHost("192.168.68.209")
-            service.setPort(9100)
-        }
-
-
-        invokeElaConnectorService { service: IElaPrinter ->
-            manageElaConnectorConnection(service.getHost(), service.getPort())
+            service.connect("192.168.68.209", 9100)
         }
     }
 
@@ -119,23 +112,12 @@ class PrinterDemoActivity : AppCompatActivity() {
                         )
                     }
                 } finally {
-                    invokeElaConnectorService { elaDisconnect() }
+                    elaDisconnect()
                 }
             }
 
         }
     }
-
-    private fun manageElaConnectorConnection(host: String, port: Int) {
-        invokeElaConnectorService {
-            if (it.getConnectionStatus() == (ConnectionStatus.STATE_DISCONNECTED)) {
-                it.connect(host, port)
-            } else {
-                it.disconnect()
-            }
-        }
-    }
-
 
     private fun elaDisconnect() {
         invokeElaConnectorService {
@@ -153,6 +135,8 @@ class PrinterDemoActivity : AppCompatActivity() {
                     } else {
                         "DISCONNECTED"
                     }
+
+                    Toast.makeText(context!!, socketConnected, Toast.LENGTH_LONG).show()
                     //Utils.showSnackBar(rootLayout, socketConnected)
                     Log.d(TAG, socketConnected)
                     invalidateOptionsMenu()
