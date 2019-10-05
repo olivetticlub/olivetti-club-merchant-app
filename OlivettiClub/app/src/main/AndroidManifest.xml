@@ -22,7 +22,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".WelcomeActivity"
-            android:screenOrientation="landscape"git>
+            android:screenOrientation="landscape">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
