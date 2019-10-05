@@ -26,7 +26,7 @@ class OlivettiClubBackendServiceFactory {
 interface OlivettiClubBackendApi {
 
     @POST("coupons")
-    fun createCoupon(@Body body: CouponCreationRequest): Call<CouponCreationResponse>
+    fun createCoupon(@Body body: CouponCreationRequest): Call<Deal>
 
 
     @POST("merchants")
@@ -35,7 +35,6 @@ interface OlivettiClubBackendApi {
 
 
 data class CouponCreationRequest(val merchant: String, val description: String, val count: Int)
-data class CouponCreationResponse(val merchant: String, val description: String, val count: Int)
 
 
 data class MerchantCreationRequest(

@@ -22,19 +22,19 @@ class Main2Activity : AppCompatActivity() {
             service.createCoupon(
                 CouponCreationRequest(
                     "danielefongo",
-                    "descrizione",
-                    1
+                    "descrizione bella",
+                    2
                 )
             )
                 .enqueue(object :
-                    Callback<CouponCreationResponse> {
-                    override fun onFailure(call: Call<CouponCreationResponse>, t: Throwable) {
+                    Callback<Deal> {
+                    override fun onFailure(call: Call<Deal>, t: Throwable) {
                         Toast.makeText(applicationContext, "errore", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(
-                        call: Call<CouponCreationResponse>,
-                        response: Response<CouponCreationResponse>
+                        call: Call<Deal>,
+                        response: Response<Deal>
                     ) {
                         Log.d("Main2Activity", response.body().toString())
                     }
