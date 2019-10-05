@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    tools:context="com.olivetti.club.CouponGenerationConfirmActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="congrats, i tuoi X coupon sono caricati e saranno mandati a potenziali clienti"
+        android:textSize="42dp">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_circle_green"
+        android:elevation="0dp"
+        android:paddingLeft="32dp"
+        android:paddingTop="16dp"
+        android:paddingRight="32dp"
+        android:paddingBottom="16dp"
+        android:text="next"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="32dp"
+        android:textStyle="normal">
+
+    </Button>
+
+</LinearLayout>

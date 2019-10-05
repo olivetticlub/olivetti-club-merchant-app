@@ -12,11 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".PrinterDemoActivity">
 
-        </activity>
+        <activity android:name=".PrinterDemoActivity" />
+        <activity android:name=".CouponGenerationConfirmActivity" />
+        <activity android:name=".GenerateCouponActivity" />
+        <activity
+            android:name=".MerchantOnBoardingActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:screenOrientation="landscape"git>
 
-        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +31,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MerchantOnBoardingActivity" />
-        <activity android:name=".GenerateCouponActivity" />
-
         <activity android:name=".Main2Activity"></activity>
 
         <receiver
