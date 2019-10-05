@@ -67,6 +67,7 @@ data class CouponConsumeResponse(
 data class Deal(
     val merchant: String,
     val description: String,
+    val merchant_address:String,
     val generated_coupons_count: String,
     val consumed_coupons_count: String,
     val id: Int

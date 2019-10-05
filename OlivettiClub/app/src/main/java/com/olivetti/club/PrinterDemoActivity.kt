@@ -18,7 +18,16 @@ class PrinterDemoActivity : AppCompatActivity() {
         printerService = PrinterService(this)
 
         printDemo.setOnClickListener {
-            printerService.printCoupon()
+            printerService.printCoupon(
+                Deal(
+                    "mercanName",
+                    "descripion",
+                    "via ciao ciao, 1",
+                    "2",
+                    "4",
+                    1
+                )
+            )
         }
 
         connectButton.setOnClickListener {

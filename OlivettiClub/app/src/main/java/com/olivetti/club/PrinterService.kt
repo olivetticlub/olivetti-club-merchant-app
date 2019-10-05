@@ -105,7 +105,7 @@ class PrinterService(private val context: Context) {
         elaDisconnect()
     }
 
-    fun printCoupon(): (View) -> Unit {
+    fun printCoupon(deal: Deal): (View) -> Unit {
         return {
             Log.d("demo print", "printing...")
 
@@ -118,14 +118,14 @@ class PrinterService(private val context: Context) {
                         val headerList = arrayListOf<String>()
                         headerList.add("")
                         headerList.add("")
-                        headerList.add("hello")
-                        headerList.add("world")
+                        headerList.add("You got a coupon:")
+                        headerList.add("${deal.description}")
                         headerList.add("")
 
                         val footerList = arrayListOf<String>()
                         footerList.add("")
-                        footerList.add("")
-                        footerList.add("")
+                        footerList.add("use this coupon at")
+                        footerList.add("${deal.merchant_address}")
                         footerList.add("")
                         footerList.add("")
 
