@@ -29,12 +29,18 @@ interface OlivettiClubBackendApi {
     fun createCoupon(@Body body: CouponCreationRequest): Call<Deal>
 
 
+    @POST("coupons/consume")
+    fun consumeCoupon(@Body body: CouponConsumeRequest): Call<CouponConsumeResponse>
+
+
     @POST("merchants")
     fun createMerchant(@Body body: MerchantCreationRequest): Call<MerchantCreationResponse>
 }
 
 
 data class CouponCreationRequest(val merchant: String, val description: String, val count: Int)
+
+data class CouponConsumeRequest(val merchant: String)
 
 
 data class MerchantCreationRequest(
@@ -50,6 +56,12 @@ data class MerchantCreationResponse(
     val ateco: String,
     val address: String,
     val deals: List<Deal>
+)
+
+data class CouponConsumeResponse(
+    val consumed_at: String,
+    val deal: Deal,
+    val id: String
 )
 
 data class Deal(

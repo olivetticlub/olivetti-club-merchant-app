@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.olivetti.club.repositories.MerchantRepository
+import com.olivetti.club.utils.CallbackHandler
 import kotlinx.android.synthetic.main.activity_merchant_onboarding.*
 import kotlinx.android.synthetic.main.activity_welcome.nextButton
 import retrofit2.Call
@@ -13,11 +14,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MerchantOnboardingActivity : Activity() {
-    private val service = OlivettiClubBackendServiceFactory.create()
     private val TAG = MerchantOnboardingActivity::class.java.simpleName
+    private val service = OlivettiClubBackendServiceFactory.create()
     lateinit var merchantRepository: MerchantRepository
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,21 +44,9 @@ class MerchantOnboardingActivity : Activity() {
             shopAddress
         )
         Log.d(TAG, request.toString())
-        service.createMerchant(request)
-            .enqueue(object :
-                Callback<MerchantCreationResponse> {
-                override fun onFailure(call: Call<MerchantCreationResponse>, t: Throwable) {
-                    Toast.makeText(applicationContext, "errore", Toast.LENGTH_LONG).show()
-                }
 
-                override fun onResponse(
-                    call: Call<MerchantCreationResponse>,
-                    response: Response<MerchantCreationResponse>
-                ) {
-                    Log.d(TAG, response.body().toString())
-                }
-
-            })
+        val callbackHandler = CallbackHandler<MerchantCreationResponse>(applicationContext, TAG)
+        service.createMerchant(request).enqueue(callbackHandler)
     }
 
 
