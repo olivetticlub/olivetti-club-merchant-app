@@ -12,7 +12,7 @@ class WelcomeActivity : Activity() {
         setContentView(R.layout.activity_welcome)
 
         nextButton.setOnClickListener {
-            startActivity(Intent(this, MerchantOnBoardingActivity::class.java))
+            startActivity(Intent(this, MerchantOnboardingActivity::class.java))
             finish()
         }
     }

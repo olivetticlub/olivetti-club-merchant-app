@@ -5,19 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_merchant_on_boarding.*
+import kotlinx.android.synthetic.main.activity_merchant_onboarding.*
 import kotlinx.android.synthetic.main.activity_welcome.nextButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MerchantOnBoardingActivity : Activity() {
+class MerchantOnboardingActivity : Activity() {
     val service = OlivettiClubBackendServiceFactory.create()
-    val TAG = MerchantOnBoardingActivity::class.java.simpleName
+    val TAG = MerchantOnboardingActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_merchant_on_boarding)
+        setContentView(R.layout.activity_merchant_onboarding)
 
         nextButton.setOnClickListener {
             createMerchant(

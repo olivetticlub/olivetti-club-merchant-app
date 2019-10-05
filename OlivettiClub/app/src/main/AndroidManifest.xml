@@ -17,7 +17,7 @@
         <activity android:name=".CouponGenerationConfirmActivity" />
         <activity android:name=".GenerateCouponActivity" />
         <activity
-            android:name=".MerchantOnBoardingActivity"
+            android:name=".MerchantOnboardingActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />
         <activity
