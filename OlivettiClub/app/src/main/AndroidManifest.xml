@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Main2Activity">
+        </activity>
+
         <receiver
             android:name=".EventsReceiver"
             android:exported="true">
