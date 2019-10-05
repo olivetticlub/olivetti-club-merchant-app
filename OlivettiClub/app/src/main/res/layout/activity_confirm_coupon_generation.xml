@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text=""
+        android:text="Congratulations!\nYour coupon are now being delivered by other shops"
         android:textSize="42dp">
 
     </TextView>
@@ -28,7 +28,7 @@
         android:paddingTop="16dp"
         android:paddingRight="32dp"
         android:paddingBottom="16dp"
-        android:text="next"
+        android:text="Close"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="32dp"
