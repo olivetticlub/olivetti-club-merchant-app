@@ -1,9 +1,9 @@
 package com.olivetti.club
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 
-class CouponGenerationConfirmActivity : AppCompatActivity() {
+class CouponGenerationConfirmActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

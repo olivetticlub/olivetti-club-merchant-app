@@ -1,6 +1,7 @@
 package com.olivetti.club
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_generate_coupon.*
 
@@ -20,5 +21,10 @@ class GenerateCouponActivity : Activity() {
         discountPicker.maxValue = 19
         discountPicker.displayedValues = (1..19).map { "${it * 5}" }.toTypedArray()
         discountPicker.wrapSelectorWheel = false
+
+        generateButton.setOnClickListener {
+            startActivity(Intent(this, CouponGenerationConfirmActivity::class.java))
+            finish()
+        }
     }
 }
