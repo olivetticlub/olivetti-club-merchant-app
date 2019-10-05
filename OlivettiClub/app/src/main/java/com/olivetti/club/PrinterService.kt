@@ -101,6 +101,10 @@ class PrinterService(private val context: Context) {
         }
     }
 
+    fun disconnectToPrinter() {
+        elaDisconnect()
+    }
+
     fun printCoupon(): (View) -> Unit {
         return {
             Log.d("demo print", "printing...")

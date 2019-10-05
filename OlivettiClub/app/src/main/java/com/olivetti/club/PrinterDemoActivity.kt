@@ -21,8 +21,12 @@ class PrinterDemoActivity : AppCompatActivity() {
             printerService.printCoupon()
         }
 
-        connectPrinter.setOnClickListener {
+        connectButton.setOnClickListener {
             printerService.connectToPrinter()
+        }
+
+        disconnectButton.setOnClickListener {
+            printerService.disconnectToPrinter()
         }
 
     }
