@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".PrinterDemoActivity" />
+        <activity android:name=".PrinterDemoActivity">
+
+        </activity>
         <activity android:name=".CouponGenerationConfirmActivity" />
         <activity android:name=".GenerateCouponActivity" />
         <activity
