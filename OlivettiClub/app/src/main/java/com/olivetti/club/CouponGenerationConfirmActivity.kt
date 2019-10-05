@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_confirm_coupon_generation.*
 
+
 class CouponGenerationConfirmActivity : Activity() {
 
     companion object {
@@ -16,7 +17,9 @@ class CouponGenerationConfirmActivity : Activity() {
 
         val couponNumber = intent.getIntExtra(COUPON_NUMBER_INTENT_KEY, 0)
 
-        textView.text =
-            "Congrats, i tuoi $couponNumber coupon sono stati caricati e saranno mandati a potenziali clienti"
+        closeButton.setOnClickListener {
+            finish()
+        }
     }
+
 }

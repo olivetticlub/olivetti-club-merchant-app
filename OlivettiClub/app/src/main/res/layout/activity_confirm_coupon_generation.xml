@@ -19,7 +19,7 @@
     </TextView>
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/closeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_circle_green"
