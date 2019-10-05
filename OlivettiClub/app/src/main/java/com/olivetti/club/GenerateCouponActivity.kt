@@ -23,7 +23,12 @@ class GenerateCouponActivity : Activity() {
         discountPicker.wrapSelectorWheel = false
 
         generateButton.setOnClickListener {
-            startActivity(Intent(this, CouponGenerationConfirmActivity::class.java))
+            startActivity(Intent(this, CouponGenerationConfirmActivity::class.java).apply {
+                putExtra(
+                    CouponGenerationConfirmActivity.COUPON_NUMBER_INTENT_KEY,
+                    couponNumberPicker.value * 10
+                )
+            })
             finish()
         }
     }
