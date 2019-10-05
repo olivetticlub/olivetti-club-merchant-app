@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_main2.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.random.Random
 
 class Main2Activity : AppCompatActivity() {
 
@@ -46,8 +47,8 @@ class Main2Activity : AppCompatActivity() {
         create_merchant.setOnClickListener {
             service.createMerchant(
                 MerchantCreationRequest(
-                    "danielefogna",
-                    "123123123",
+                    "danielefogna"+ Random.nextInt(0,100),
+                    "123123123"+ Random.nextInt(0,100),
                     "31.43.13",
                     "via del cazzettino"
                 )

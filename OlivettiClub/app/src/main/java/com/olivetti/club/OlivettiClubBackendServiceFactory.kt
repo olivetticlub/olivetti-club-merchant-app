@@ -39,14 +39,14 @@ data class CouponCreationRequest(val merchant: String, val description: String, 
 
 data class MerchantCreationRequest(
     val name: String,
-    val vatNumber: String,
+    val vat_number: String,
     val ateco: String,
     val address: String
 )
 
 data class MerchantCreationResponse(
     val name: String,
-    val vatNumber: String,
+    val vat_number: String,
     val ateco: String,
     val address: String,
     val deals: List<Deal>
