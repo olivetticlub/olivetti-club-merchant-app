@@ -3,21 +3,18 @@ package com.olivetti.club
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import com.olivetti.club.repositories.MerchantRepository
-import com.olivetti.club.utils.CallbackHandler
 import kotlinx.android.synthetic.main.activity_generate_coupon.*
 
 class GenerateCouponActivity : Activity() {
     private val TAG = this::class.java.simpleName
     private val service = OlivettiClubBackendServiceFactory.create()
-    lateinit var merchantRepository: MerchantRepository
+   // lateinit var merchantRepository: MerchantRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generate_coupon)
 
-        merchantRepository = MerchantRepository(this)
+        //merchantRepository = MerchantRepository(this)
 
         couponNumberPicker.minValue = 1
         couponNumberPicker.maxValue = 10
@@ -33,7 +30,7 @@ class GenerateCouponActivity : Activity() {
         generateButton.setOnClickListener {
             val numberOfCoupons = couponNumberPicker.value * 10
             val discountAmount = discountPicker.value * 5
-            generateCoupon(numberOfCoupons, discountAmount)
+            //generateCoupon(numberOfCoupons, discountAmount)
             startActivity(Intent(this, CouponGenerationConfirmActivity::class.java).apply {
                 putExtra(
                     CouponGenerationConfirmActivity.COUPON_NUMBER_INTENT_KEY,
@@ -44,7 +41,7 @@ class GenerateCouponActivity : Activity() {
         }
     }
 
-    private fun generateCoupon(numberOfCoupons: Int, discountAmount: Int) {
+   /* private fun generateCoupon(numberOfCoupons: Int, discountAmount: Int) {
         val createCouponRequest = CouponCreationRequest(
             merchantRepository.loadMerchant()!!,
             "Get a product for $discountAmount% off!",
@@ -53,5 +50,5 @@ class GenerateCouponActivity : Activity() {
         Log.d(TAG, createCouponRequest.toString())
         val callbackHandler = CallbackHandler<Deal>(applicationContext, TAG)
         service.createCoupon(createCouponRequest).enqueue(callbackHandler)
-    }
+    }*/
 }
