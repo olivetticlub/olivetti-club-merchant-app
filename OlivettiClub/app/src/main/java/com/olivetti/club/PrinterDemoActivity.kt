@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_printer_demo.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.lang.ref.WeakReference
 
 
 @ExperimentalCoroutinesApi
@@ -15,7 +16,7 @@ class PrinterDemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_printer_demo)
 
-        printerService = PrinterService(this)
+        printerService = PrinterService(WeakReference(this))
 
         printDemo.setOnClickListener {
             printerService.printCoupon(
@@ -37,6 +38,7 @@ class PrinterDemoActivity : AppCompatActivity() {
         disconnectButton.setOnClickListener {
             printerService.disconnectToPrinter()
         }
+
 
     }
 

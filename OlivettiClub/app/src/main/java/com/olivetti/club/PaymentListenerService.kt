@@ -8,16 +8,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.ref.WeakReference
 
 class PaymentListenerService : IntentService("PAYMENT_COMPLETED_LISTENER") {
+
     private val service = OlivettiClubBackendServiceFactory.create()
     lateinit var merchantRepository: MerchantRepository
     private val TAG = this::class.java.simpleName
 
-
     @ExperimentalCoroutinesApi
     override fun onHandleIntent(intent: Intent?) {
-      //  val printerService = PrinterService(this)
         merchantRepository = MerchantRepository(this)
         val consumeCouponRequest = CouponConsumeRequest(merchantRepository.loadMerchant()!!)
 
@@ -29,13 +29,16 @@ class PaymentListenerService : IntentService("PAYMENT_COMPLETED_LISTENER") {
                     response: Response<CouponConsumeResponse>
                 ) {
                     Log.d(TAG, response.body().toString())
-                  //  printerService.printCoupon(response.body()!!.deal)
+                    with(PrinterService(WeakReference(this@PaymentListenerService))) {
+                        printCoupon(response.body()!!.deal)
+                    }
                 }
 
                 override fun onFailure(call: Call<CouponConsumeResponse>, t: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
                 }
 
             })
     }
+    
 }
